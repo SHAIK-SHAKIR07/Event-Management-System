@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Scanner } from '@yudiel/react-qr-scanner';
-import axios from 'axios';
+import api from '../utils/api';
 
 export default function CheckIn() {
   const [result, setResult] = useState(null);

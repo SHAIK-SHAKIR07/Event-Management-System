@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { motion } from 'framer-motion';
 import { PageWrapper, AnimatedEmoji, StaggerContainer, StaggerItem } from '../components/AnimatedElements';
 
