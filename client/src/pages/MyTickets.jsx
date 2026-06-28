@@ -8,7 +8,7 @@ export default function MyTickets() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/tickets/my-tickets')
+    api.get('/api/tickets/my-tickets')
       .then(res => setTickets(res.data))
       .finally(() => setLoading(false));
   }, []);

@@ -30,7 +30,7 @@ export default function Home() {
     try {
       const currentPage = resetPage ? 1 : page;
       if (resetPage) setPage(1);
-      const { data } = await axios.get('/api/events', {
+      const { data } = await api.get('/api/events', {
         params: { ...filters, page: currentPage, limit: 9 }
       });
       setEvents(data.events);

@@ -37,14 +37,14 @@ export default function CreateEvent() {
         setUploading(true);
         const formData = new FormData();
         formData.append('banner', imageFile);
-        const { data } = await axios.post('/api/events/upload-image', formData, {
+        const { data } = await api.post('/api/events/upload-image', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         bannerUrl = data.url;
         setUploading(false);
       }
 
-      await axios.post('/api/events', { ...form, banner: bannerUrl });
+      await api.post('/api/events', { ...form, banner: bannerUrl });
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Error creating event');

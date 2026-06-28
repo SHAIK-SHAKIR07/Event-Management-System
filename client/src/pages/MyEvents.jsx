@@ -14,7 +14,7 @@ export default function MyEvents() {
   const fetchMyEvents = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get('/api/events/my-events');
+      const { data } = await api.get('/api/events/my-events');
       setEvents(data);
     } catch (err) {
       console.error(err);
@@ -27,7 +27,7 @@ export default function MyEvents() {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await axios.delete(`/api/events/${deleteId}`);
+      await api.delete(`/api/events/${deleteId}`);
       setEvents(events.filter(e => e._id !== deleteId));
       setDeleteId(null);
     } catch (err) {

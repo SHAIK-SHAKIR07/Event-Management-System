@@ -14,7 +14,13 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
 app.use('/api/tickets', require('./routes/tickets'));
-
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://your-app-name.vercel.app'  // add after vercel deploy
+  ],
+  credentials: true
+}));
 mongoose.connect(process.env.MONGO_URI, {
   family: 4,
   serverSelectionTimeoutMS: 10000,

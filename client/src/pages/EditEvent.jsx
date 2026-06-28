@@ -15,7 +15,7 @@ export default function EditEvent() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get(`/api/events/${id}`).then(res => {
+    api.get(`/api/events/${id}`).then(res => {
       setForm(res.data);
       setImagePreview(res.data.banner);
     });
@@ -38,13 +38,13 @@ export default function EditEvent() {
         setUploading(true);
         const formData = new FormData();
         formData.append('banner', imageFile);
-        const { data } = await axios.post('/api/events/upload-image', formData, {
+        const { data } = await api.post('/api/events/upload-image', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         bannerUrl = data.url;
         setUploading(false);
       }
-      await axios.put(`/api/events/${id}`, { ...form, banner: bannerUrl });
+      await api.put(`/api/events/${id}`, { ...form, banner: bannerUrl });
       navigate('/my-events');
     } catch (err) {
       setError(err.response?.data?.message || 'Error updating event');

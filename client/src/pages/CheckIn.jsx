@@ -12,7 +12,7 @@ export default function CheckIn() {
     setScanning(false);
     const qrToken = detectedCodes[0].rawValue;
     try {
-      const res = await axios.post('/api/tickets/checkin', { qrToken });
+      const res = await api.post('/api/tickets/checkin', { qrToken });
       setResult(res.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Check-in failed');

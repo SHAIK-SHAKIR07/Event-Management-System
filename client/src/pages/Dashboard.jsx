@@ -8,7 +8,7 @@ export default function Dashboard() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/events/analytics').then(res => setData(res.data));
+    api.get('/api/events/analytics').then(res => setData(res.data));
   }, []);
 
   if (!data) return (

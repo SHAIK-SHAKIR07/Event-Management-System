@@ -12,7 +12,7 @@ export default function EventDetail() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    axios.get(`/api/events/${id}`).then(res => setEvent(res.data));
+    api.get(`/api/events/${id}`).then(res => setEvent(res.data));
   }, [id]);
 
   const handleBook = async () => {
@@ -20,7 +20,7 @@ export default function EventDetail() {
   if (!selectedTier) return setMessage('Please select a ticket tier');
   setBooking(true);
   try {
-    await axios.post('/api/tickets/book', {
+    await api.post('/api/tickets/book', {
       eventId: id,
       tierName: selectedTier.name,
       paymentMethodId: 'pm_card_visa'  // Stripe test payment method
