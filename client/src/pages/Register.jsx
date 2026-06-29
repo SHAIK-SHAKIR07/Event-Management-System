@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
   const navigate = useNavigate();
-  useEffect(() => { navigate('/login'); }, []);
+  useEffect(() => {
+  navigate('/login');
+}, [navigate]);
   return null;
 }

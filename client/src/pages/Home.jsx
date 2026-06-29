@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import api from '../utils/api';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -25,7 +26,8 @@ export default function Home() {
   const categories = ['Music','Tech','Sports','Art','Food','Other'];
   const categoryEmojis = { Music:'🎵', Tech:'💻', Sports:'⚽', Art:'🎨', Food:'🍕', Other:'🎪' };
 
-  const fetchEvents = async (resetPage = false) => {
+  // const fetchEvents = async (resetPage = false) => {
+    const fetchEvents = useCallback(async (resetPage = false) => {
     setLoading(true);
     try {
       const currentPage = resetPage ? 1 : page;
@@ -40,10 +42,17 @@ export default function Home() {
       console.error(err);
     }
     setLoading(false);
-  };
+  }, [page, filters]);
 
-  useEffect(() => { fetchEvents(true); }, [filters]);
-  useEffect(() => { fetchEvents(); }, [page]);
+  // useEffect(() => { fetchEvents(true); }, [filters]);
+  // useEffect(() => { fetchEvents(); }, [page]);
+  useEffect(() => {
+  fetchEvents(true);
+}, [filters, fetchEvents]);
+
+  useEffect(() => {
+  fetchEvents();
+}, [page, fetchEvents]);
 
   const updateFilter = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
