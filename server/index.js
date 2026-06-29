@@ -12,7 +12,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://eventhub-frontend.vercel.app',
+    'https://event-management-system-sage-eta.vercel.app',
     /\.vercel\.app$/  // allows all vercel subdomains
   ],
   credentials: true
