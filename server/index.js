@@ -8,23 +8,25 @@ dotenv.config();
 dns.setDefaultResultOrder('ipv4first');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://eventhub-frontend.vercel.app',
+    /\.vercel\.app$/  // allows all vercel subdomains
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
 app.use('/api/tickets', require('./routes/tickets'));
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://your-app-name.vercel.app'  // add after vercel deploy
-  ],
-  credentials: true
-}));
+
 mongoose.connect(process.env.MONGO_URI, {
   family: 4,
   serverSelectionTimeoutMS: 10000,
-  connectTimeoutMS: 10000,
 })
 .then(() => console.log('✅ MongoDB Atlas Connected'))
 .catch(err => console.log('❌ DB Error:', err));
